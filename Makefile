@@ -25,5 +25,5 @@ static: binary
 	@cp goapp/web/* static/web
 
 clean:
-	@rm -rf temp
+	@rm -rf temp static
 	@rm -f goapp/web/app.wasm
