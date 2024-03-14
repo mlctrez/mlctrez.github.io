@@ -1,7 +1,6 @@
 package compo
 
 import (
-	"fmt"
 	"github.com/maxence-charriere/go-app/v10/pkg/app"
 )
 
@@ -14,20 +13,16 @@ type Version struct {
 }
 
 func (v *Version) OnMount(ctx app.Context) {
-	app.Log("OnMount", fmt.Sprintf("%v %v", &v, v.updateAvailable))
 	ctx.Async(ctx.TryUpdateApp)
 }
 
 func (v *Version) OnAppUpdate(ctx app.Context) {
-	app.Log("OnAppUpdate 1", fmt.Sprintf("%v %v", &v, v.updateAvailable))
 	if ctx.AppUpdateAvailable() {
 		v.updateAvailable = true
-		app.Log("OnAppUpdate 2", fmt.Sprintf("%v %v", &v, v.updateAvailable))
 	}
 }
 
 func (v *Version) Render() app.UI {
-	app.Log("Render", fmt.Sprintf("%v %q", &v, v.updateAvailable))
 	if v.updateAvailable {
 		return app.Div().Class("version").Text("Update Available").OnClick(func(ctx app.Context, e app.Event) {
 			ctx.Reload()
