@@ -21,7 +21,7 @@ wasm:
 
 static: binary
 	@mkdir -p static
-	@GENERATE_STATIC=static ./temp/$(APP_NAME) -action run
+	@GENERATE_STATIC=static GOAPP_USE_COMPRESSION=1 ./temp/$(APP_NAME) -action run
 	@cp goapp/web/* static/web
 
 clean:
