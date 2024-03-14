@@ -96,6 +96,7 @@ func (s *Service) setupEngine() (err error) {
 	if wasmSize, err = s.wasmSize(); err != nil {
 		return err
 	}
+	s.handler.WasmContentLength = fmt.Sprintf("%d", wasmSize)
 	s.handler.WasmContentLengthHeader = WasmHeader
 	wasmHeaderHandler := (&fixedHeader{key: WasmHeader, value: fmt.Sprintf("%d", wasmSize)}).HandlerFunc
 	middleware = append(middleware, wasmHeaderHandler, brotli.Brotli(brotli.DefaultCompression))
