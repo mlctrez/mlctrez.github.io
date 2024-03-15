@@ -61,8 +61,9 @@ func (s *Service) Start(_ service.Service) (err error) {
 		}
 	}
 
-	if os.Getenv("GENERATE_STATIC") != "" {
-		if err = app.GenerateStaticWebsite(os.Getenv("GENERATE_STATIC"), s.handler); err != nil {
+	generateStatic := os.Getenv("GENERATE_STATIC")
+	if generateStatic != "" {
+		if err = app.GenerateStaticWebsite(generateStatic, s.handler); err != nil {
 			log.Fatal(err)
 		}
 		os.Exit(0)
@@ -145,6 +146,7 @@ func (s *Service) setupHandler() (err error) {
 
 func (s *Service) goAppMappings() (err error) {
 	goAppHandlerFunc := (&goAppHandler{handler: s.handler}).HandlerFunc
+
 	s.mappings["/"] = goAppHandlerFunc
 	s.mappings["/app.js"] = goAppHandlerFunc
 	s.mappings["/app-worker.js"] = goAppHandlerFunc
