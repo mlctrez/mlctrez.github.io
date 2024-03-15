@@ -128,6 +128,9 @@ func (s *Service) setupHandler() (err error) {
 	s.handler.Description = "mlctrez.github.io"
 	s.handler.Name = "mlctrez.github.io"
 	s.handler.ShortName = "mlctrez"
+	s.handler.Author = "mlctrez@gmail.com"
+	s.handler.Image = "web/background.jpg"
+	s.handler.Domain = s.handler.Name
 	s.handler.Icon = app.Icon{
 		Default:    "https://mlctrez.github.io/web/logo.png",
 		Large:      "https://mlctrez.github.io/web/logo.png",
